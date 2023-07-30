@@ -1,8 +1,8 @@
 describe('The Home Page', () => {
 	it('successfully loads', () => {
-		cy.visit('/');
+		cy.visit('/debounce');
 		cy.findByRole('heading', {
-			name: /Vite [+] React/i
+			name: /Start Wars character finder/i
 		}).should('exist');
 	});
 });
