@@ -1,20 +1,23 @@
-import useCounter from './hooks/use-counter';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
+import LoadingOrError from './components/LoadingOrError';
+const Debounce = lazy(async () => import('./pages/Debounce'));
 
 export default function App() {
-	const { count, increment } = useCounter();
-
 	return (
-		<>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => increment()}>count is {count}</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</>
+		<BrowserRouter>
+			<Suspense fallback={<LoadingOrError />}>
+				<Routes>
+					<Route path="/debounce" element={<Debounce />} />
+
+					{/* Navigate to /debounce as default route */}
+					<Route
+						path="*"
+						element={<Navigate to="/debounce" replace={true} />}
+					/>
+				</Routes>
+			</Suspense>
+		</BrowserRouter>
 	);
 }
