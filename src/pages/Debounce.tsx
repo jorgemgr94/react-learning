@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { debounce } from "lodash";
+import { useState, useRef } from 'react';
+import debounce from 'lodash/debounce';
 
 type Character = {
 	name: string;
@@ -18,7 +18,7 @@ export default function Debounce() {
 	}
 
 	const debouncedSearch = useRef(
-		debounce(async (criteria) => {
+		debounce(async (criteria: string) => {
 			setCharacters(await search(criteria));
 		}, 300)
 	).current;
@@ -28,11 +28,17 @@ export default function Debounce() {
 	}
 
 	return (
-		<section>
+		<section className='p-10'>
+			<h1 className="mb-4 text-3xl font-bold underline">
+				Start Wars character finder
+			</h1>
 			<input
+				className="bg-gray-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
 				type="search"
+				name="search"
 				placeholder="Enter your search"
 				onChange={handleChange}
+				aria-label="Enter your search"
 			/>
 			<ul>
 				{characters.map((character) => (
