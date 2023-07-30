@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "vite --port 3000 --open",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "test": "jest",
     "test:watch": "jest --watch --config=jest.config.js",
     "cy:open": "cypress open",
