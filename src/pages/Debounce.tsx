@@ -1,26 +1,64 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 import Footer from '@src/components/Footer';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import { LinearProgress, Tooltip } from '@mui/material';
 
-type Character = {
-	name: string;
+type Book = {
+	id: number;
+	title: string;
+	authors: [
+		{
+			name: string;
+		}
+	];
+	formats: {
+		'image/jpeg': string;
+	};
 };
 
 export default function Debounce() {
-	const [characters, setCharacters] = useState<string[]>([]);
+	const [books, setBooks] = useState<Book[]>([]);
+	const [searchCriteria, setSeachCriteria] = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(false);
 
-	async function search(criteria: string) {
-		const response = await fetch(
-			`https://swapi.dev/api/people/?search=${criteria}`
-		);
-		const body = await response.json();
+	useEffect(() => {
+		setBooks([]);
+		if (searchCriteria === '') return;
 
-		return body.results.map((result: Character) => result.name);
-	}
+		setLoading(true);
+		const controller = new AbortController();
+
+		fetch(`https://gutendex.com/books/?search=${searchCriteria}`, {
+			signal: controller.signal
+		})
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				}
+				return Promise.reject();
+			})
+			.then((fetchedBooks) => {
+				setBooks(fetchedBooks.results as Book[]);
+				setLoading(false);
+			});
+
+		return () => {
+			controller.abort();
+			setLoading(false);
+		};
+	}, [searchCriteria]);
 
 	const debouncedSearch = useRef(
-		debounce(async (criteria: string) => {
-			setCharacters(await search(criteria));
+		debounce(async (text: string) => {
+			setSeachCriteria(text);
 		}, 300)
 	).current;
 
@@ -29,25 +67,52 @@ export default function Debounce() {
 	}
 
 	return (
-		<section className="p-10">
-			<h1 className="mb-4 text-3xl font-bold underline">
-				Start Wars character finder
-			</h1>
-			<input
-				id="search-value"
-				className="bg-gray-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-				type="search"
-				name="search"
-				placeholder="Enter your search"
-				onChange={handleChange}
-				aria-label="Enter your search"
-			/>
-			<ul>
-				{characters.map((character) => (
-					<li key={character}>{character}</li>
-				))}
-			</ul>
-			<Footer />
-		</section>
+		<>
+			{loading && <LinearProgress />}
+			<section className="p-10">
+				<h1 className="mb-4 text-3xl font-bold">Books finder</h1>
+				<Paper
+					component="form"
+					sx={{ p: '2px 8px', display: 'flex', alignItems: 'center' }}
+				>
+					<InputBase
+						sx={{ ml: 1, flex: 1 }}
+						placeholder="Search Books"
+						onChange={handleChange}
+						inputProps={{ 'aria-label': 'search google maps' }}
+					/>
+					<IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+						<SearchIcon />
+					</IconButton>
+				</Paper>
+				<ImageList variant="masonry" cols={5} gap={18}>
+					{books.map((book) => (
+						<ImageListItem key={book.id}>
+							<img
+								src={book.formats['image/jpeg']}
+								srcSet={book.formats['image/jpeg']}
+								alt={book.title}
+								loading="lazy"
+							/>
+							<ImageListItemBar
+								title={book.title}
+								subtitle={book.authors.at(0)?.name || 'No author'}
+								actionIcon={
+									<Tooltip title={book.title}>
+										<IconButton
+											sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+											aria-label={`info about ${book.title}`}
+										>
+											<InfoIcon />
+										</IconButton>
+									</Tooltip>
+								}
+							/>
+						</ImageListItem>
+					))}
+				</ImageList>
+				<Footer />
+			</section>
+		</>
 	);
 }
