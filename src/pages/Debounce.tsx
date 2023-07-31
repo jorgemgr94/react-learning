@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import debounce from 'lodash/debounce';
-import Footer from '../components/Footer';
+import Footer from '@src/components/Footer';
 
 type Character = {
 	name: string;

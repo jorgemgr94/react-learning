@@ -15,11 +15,19 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx"
+		"jsx": "react-jsx",
+		"incremental": true,
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": ["./src/*"]
+		}
 	},
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts"
+  ],
 	"include": [
 		"src",
-		"cypress",
 		"jest.config.js",
 		"cypress.config.ts",
 		"vite.config.ts"
