@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import debounce from 'lodash/debounce';
+import Footer from '../components/Footer';
 
 type Character = {
 	name: string;
@@ -28,11 +29,12 @@ export default function Debounce() {
 	}
 
 	return (
-		<section className='p-10'>
+		<section className="p-10">
 			<h1 className="mb-4 text-3xl font-bold underline">
 				Start Wars character finder
 			</h1>
 			<input
+				id="search-value"
 				className="bg-gray-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
 				type="search"
 				name="search"
@@ -45,6 +47,7 @@ export default function Debounce() {
 					<li key={character}>{character}</li>
 				))}
 			</ul>
+			<Footer />
 		</section>
 	);
 }
