@@ -18,6 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import { Link } from 'react-router-dom';
+import { useLoading } from '@src/contexts/LoadingContext';
+import { LinearProgress } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -77,6 +79,7 @@ interface Props {
 export default function Template(props: Props) {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
+	const { loading } = useLoading();
 
 	const routes = [
 		{
@@ -123,6 +126,7 @@ export default function Template(props: Props) {
 						React Learning
 					</Typography>
 				</Toolbar>
+        {loading && <LinearProgress />}
 			</AppBar>
 			<Drawer
 				sx={{

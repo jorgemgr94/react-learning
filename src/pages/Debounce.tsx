@@ -9,7 +9,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { LinearProgress, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
+import { useLoading } from '@src/contexts/LoadingContext';
 
 type Book = {
 	id: number;
@@ -27,7 +28,7 @@ type Book = {
 export default function Debounce() {
 	const [books, setBooks] = useState<Book[]>([]);
 	const [searchCriteria, setSeachCriteria] = useState<string>('');
-	const [loading, setLoading] = useState<boolean>(false);
+	const { setLoading } = useLoading();
 
 	useEffect(() => {
 		setBooks([]);
@@ -68,7 +69,6 @@ export default function Debounce() {
 
 	return (
 		<>
-			{loading && <LinearProgress />}
 			<section>
 				<h1 className="mb-4 text-3xl font-bold">Books finder</h1>
 				<Paper
