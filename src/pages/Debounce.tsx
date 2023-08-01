@@ -55,7 +55,7 @@ export default function Debounce() {
 			controller.abort();
 			setLoading(false);
 		};
-	}, [searchCriteria]);
+	}, [searchCriteria, setLoading]);
 
 	const debouncedSearch = useRef(
 		debounce(async (text: string) => {
