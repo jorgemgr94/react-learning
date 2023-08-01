@@ -69,7 +69,7 @@ export default function Debounce() {
 	return (
 		<>
 			{loading && <LinearProgress />}
-			<section className="p-10">
+			<section>
 				<h1 className="mb-4 text-3xl font-bold">Books finder</h1>
 				<Paper
 					component="form"
