@@ -97,6 +97,10 @@ export default function Template(props: Props) {
 		{
 			name: 'Form Validation',
 			path: '/form-validation'
+		},
+    {
+			name: 'Submit Hook',
+			path: '/submit-hook'
 		}
 	];
 

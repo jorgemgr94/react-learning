@@ -11,7 +11,7 @@ function UploadFile() {
 			const data = new FormData();
 			data.set('file', file);
 
-      // TODO: implement backend stuff
+			// TODO: implement backend stuff
 			const res = await fetch('/api/upload', {
 				method: 'POST',
 				body: data
@@ -27,8 +27,10 @@ function UploadFile() {
 	};
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!e.target.files?.[0]) return;
-		setFile(e.target.files?.[0]);
+		const file = e.target.files?.[0];
+		if (!file) return;
+
+		setFile(file);
 	};
 
 	return (

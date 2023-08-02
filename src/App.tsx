@@ -12,6 +12,7 @@ const Debounce = lazy(async () => import('./pages/Debounce'));
 const UploadFile = lazy(async () => import('./pages/UploadFile'));
 const Memoization = lazy(async () => import('./pages/Memoization'));
 const FormValidation = lazy(async () => import('./pages/FormValidation'));
+const SubmitHook = lazy(async () => import('./pages/SubmitHook'));
 
 export default function App() {
 	return (
@@ -25,6 +26,7 @@ export default function App() {
 								<Route path="/upload-file" element={<UploadFile />} />
 								<Route path="/memoization" element={<Memoization />} />
 								<Route path="/form-validation" element={<FormValidation />} />
+								<Route path="/submit-hook" element={<SubmitHook />} />
 
 								{/* Navigate to /debounce as default route */}
 								<Route
