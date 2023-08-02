@@ -101,6 +101,10 @@ export default function Template(props: Props) {
     {
 			name: 'Submit Hook',
 			path: '/submit-hook'
+		},
+    {
+			name: 'Display Locations',
+			path: '/display-locations'
 		}
 	];
 

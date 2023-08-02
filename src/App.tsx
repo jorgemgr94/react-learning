@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import LoadingOrError from './components/LoadingOrError';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -13,31 +14,40 @@ const UploadFile = lazy(async () => import('./pages/UploadFile'));
 const Memoization = lazy(async () => import('./pages/Memoization'));
 const FormValidation = lazy(async () => import('./pages/FormValidation'));
 const SubmitHook = lazy(async () => import('./pages/SubmitHook'));
+const DisplayLocations = lazy(async () => import('./pages/DisplayLocations'));
+
+const client = new ApolloClient({
+  uri: 'https://flyby-router-demo.herokuapp.com/',
+	cache: new InMemoryCache()
+});
 
 export default function App() {
 	return (
-		<BrowserRouter>
-			<ErrorBoundary fallback={<ErrorPage />}>
-				<Suspense fallback={<LoadingOrError />}>
-					<LoadingProvider>
-						<Template>
-							<Routes>
-								<Route path="/debounce" element={<Debounce />} />
-								<Route path="/upload-file" element={<UploadFile />} />
-								<Route path="/memoization" element={<Memoization />} />
-								<Route path="/form-validation" element={<FormValidation />} />
-								<Route path="/submit-hook" element={<SubmitHook />} />
+		<ApolloProvider client={client}>
+			<BrowserRouter>
+				<ErrorBoundary fallback={<ErrorPage />}>
+					<Suspense fallback={<LoadingOrError />}>
+						<LoadingProvider>
+							<Template>
+								<Routes>
+									<Route path="/debounce" element={<Debounce />} />
+									<Route path="/upload-file" element={<UploadFile />} />
+									<Route path="/memoization" element={<Memoization />} />
+									<Route path="/form-validation" element={<FormValidation />} />
+									<Route path="/submit-hook" element={<SubmitHook />} />
+									<Route path="/display-locations" element={<DisplayLocations />} />
 
-								{/* Navigate to /debounce as default route */}
-								<Route
-									path="*"
-									element={<Navigate to="/debounce" replace={true} />}
-								/>
-							</Routes>
-						</Template>
-					</LoadingProvider>
-				</Suspense>
-			</ErrorBoundary>
-		</BrowserRouter>
+									{/* Navigate to /debounce as default route */}
+									<Route
+										path="*"
+										element={<Navigate to="/debounce" replace={true} />}
+									/>
+								</Routes>
+							</Template>
+						</LoadingProvider>
+					</Suspense>
+				</ErrorBoundary>
+			</BrowserRouter>
+		</ApolloProvider>
 	);
 }
