@@ -24,12 +24,7 @@
 	},
   "exclude": [
     "node_modules",
-    "src/**/*.spec.ts"
+    "./cypress.config.ts",
   ],
-	"include": [
-		"src",
-		"jest.config.js",
-		"cypress.config.ts",
-		"vite.config.ts"
-	]
+	"include": [ "**/*.ts", "**/*.tsx"]
 }
