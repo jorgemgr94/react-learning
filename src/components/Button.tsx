@@ -1,9 +1,9 @@
 interface ButtonProps {
-	text: string;
+  text: string;
 }
 
-function Button({ text }: ButtonProps) {
-	return <button>{text}</button>;
+function Button ({ text }: ButtonProps) {
+  return <button>{text}</button>;
 }
 
 export default Button;
