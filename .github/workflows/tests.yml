@@ -1,6 +1,9 @@
 name: Tests 🧪
 
-on: push
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   unit:
