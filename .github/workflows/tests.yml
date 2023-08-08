@@ -25,6 +25,9 @@ jobs:
       - name: Test
         run: npm run test
   e2e:
+    # NOTE: intentionally marked as dependant of unit for testing purposes
+    needs: [unit]
+
     runs-on: ubuntu-latest
 
     steps:
