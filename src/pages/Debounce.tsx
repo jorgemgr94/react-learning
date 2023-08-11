@@ -11,6 +11,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Tooltip } from '@mui/material';
 import { useLoading } from '@src/contexts/LoadingContext';
+import { signInAnonymously } from '@src/utils/firebase/auth';
 
 type Book = {
   id: number;
@@ -25,7 +26,7 @@ type Book = {
   };
 };
 
-export default function Debounce () {
+export default function Debounce() {
   const [books, setBooks] = useState<Book[]>([]);
   const [searchCriteria, setSeachCriteria] = useState<string>('');
   const { setLoading } = useLoading();
@@ -63,9 +64,13 @@ export default function Debounce () {
     }, 300)
   ).current;
 
-  function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     debouncedSearch(e.target.value);
   }
+
+  useEffect(() => {
+    signInAnonymously();
+  }, []);
 
   return (
     <>
