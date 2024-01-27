@@ -20,8 +20,8 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { routes } from '@src/constants/routes';
 import { useLoading } from '@src/contexts/LoadingContext';
-
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
@@ -81,33 +81,6 @@ export default function Template(props: Props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const { loading } = useLoading();
-
-  const routes = [
-    {
-      name: 'Debounce',
-      path: '/debounce',
-    },
-    {
-      name: 'Upload File',
-      path: '/upload-file',
-    },
-    {
-      name: 'Memoization',
-      path: '/memoization',
-    },
-    {
-      name: 'Form Validation',
-      path: '/form-validation',
-    },
-    {
-      name: 'Submit Hook',
-      path: '/submit-hook',
-    },
-    {
-      name: 'Display Locations',
-      path: '/display-locations',
-    },
-  ];
 
   const handleDrawerOpen = () => {
     setOpen(true);
