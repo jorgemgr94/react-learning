@@ -1,4 +1,5 @@
 import { Alert, Button } from '@mui/material';
+
 import useSubmit from '@src/hooks/useSubmit';
 
 const submitButton = async () => {
@@ -8,7 +9,7 @@ const submitButton = async () => {
   return await fetch(`https://httpstat.us/${statusCode}`);
 };
 
-export default function CarsSuspense () {
+export default function CarsSuspense() {
   const { handleSubmit, loading, error } = useSubmit(submitButton);
 
   return (

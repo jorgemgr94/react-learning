@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import Pizza from '../Pizza';
 import type { Ingredient } from '../Pizza';
 
@@ -7,7 +8,7 @@ test('contains all ingredients', () => {
     'bacon',
     'tomato',
     'mozzarella',
-    'pineapples'
+    'pineapples',
   ];
   const { getByText } = render(<Pizza ingredients={ingredients} />);
 

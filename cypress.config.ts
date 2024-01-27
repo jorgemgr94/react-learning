@@ -9,6 +9,6 @@ export default defineConfig({
     video: false,
     viewportWidth: 1920,
     viewportHeight: 1080,
-    supportFile: 'cypress/e2e/support/e2e.ts'
-  }
+    supportFile: 'cypress/e2e/support/e2e.ts',
+  },
 });

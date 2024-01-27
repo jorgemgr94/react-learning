@@ -4,7 +4,7 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  Typography
+  Typography,
 } from '@mui/material';
 
 const GET_LOCATIONS = gql`
@@ -27,7 +27,7 @@ interface LocationsData {
   }[];
 }
 
-export default function DisplayLocations () {
+export default function DisplayLocations() {
   const { loading, error, data } = useQuery<LocationsData>(GET_LOCATIONS);
 
   if (loading) return <p>Loading...</p>;

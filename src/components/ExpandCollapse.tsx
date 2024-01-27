@@ -5,9 +5,9 @@ interface ExpandCollapseProps {
   children: React.ReactNode;
 }
 
-export default function ExpandCollapse ({
+export default function ExpandCollapse({
   excerpt,
-  children
+  children,
 }: ExpandCollapseProps) {
   const [isExpanded, setExpanded] = useState(false);
   return (

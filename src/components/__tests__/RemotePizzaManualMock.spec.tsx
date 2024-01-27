@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RemotePizza from '../RemotePizza';
+
 import { Ingredient } from '../Pizza';
+import RemotePizza from '../RemotePizza';
 
 const ingredients: Ingredient[] = [
   'bacon',
   'tomato',
   'mozzarella',
-  'pineapples'
+  'pineapples',
 ];
 
 test('download ingredients from internets', async () => {
@@ -15,7 +16,7 @@ test('download ingredients from internets', async () => {
 
   const fetchIngredients = () =>
     Promise.resolve({
-      args: { ingredients }
+      args: { ingredients },
     });
   render(<RemotePizza fetchIngredients={fetchIngredients} />);
 

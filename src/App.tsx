@@ -1,12 +1,11 @@
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import LoadingOrError from './components/LoadingOrError';
 import ErrorBoundary from './components/ErrorBoundary';
 import ErrorPage from './components/ErrorPage';
+import LoadingOrError from './components/LoadingOrError';
 import Template from './components/Template';
-
 import { LoadingProvider } from './contexts/LoadingContext';
 
 const Debounce = lazy(() => import('./pages/Debounce'));
@@ -18,10 +17,10 @@ const DisplayLocations = lazy(() => import('./pages/DisplayLocations'));
 
 const client = new ApolloClient({
   uri: 'https://flyby-router-demo.herokuapp.com/',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
-export default function App () {
+export default function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>

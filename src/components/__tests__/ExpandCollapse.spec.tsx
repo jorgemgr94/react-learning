@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+
 import ExpandCollapse from '../ExpandCollapse';
 
 // NOTE: usage of fireEvent

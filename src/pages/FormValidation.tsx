@@ -2,12 +2,12 @@ import { Button, Grid, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export default function SignupForm () {
+export default function SignupForm() {
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -18,11 +18,11 @@ export default function SignupForm () {
         .required('Last Name Required'),
       email: Yup.string()
         .email('Invalid email address')
-        .required('Email Required')
+        .required('Email Required'),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-    }
+    },
   });
   return (
     <form onSubmit={formik.handleSubmit}>

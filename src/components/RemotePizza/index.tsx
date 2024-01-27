@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import type { fetchIngredientsResponse } from './service';
-import { Ingredient } from '../Pizza';
-import { fetchIngredients as defaultFetchIngredients } from './service';
 
-export default function RemotePizza ({
-  fetchIngredients = defaultFetchIngredients
+import type { fetchIngredientsResponse } from './service';
+import { fetchIngredients as defaultFetchIngredients } from './service';
+import { Ingredient } from '../Pizza';
+
+export default function RemotePizza({
+  fetchIngredients = defaultFetchIngredients,
 }: {
   fetchIngredients?: () => Promise<fetchIngredientsResponse>;
 }) {

@@ -1,15 +1,16 @@
-import { useState, useRef, useEffect } from 'react';
-import debounce from 'lodash/debounce';
-import Footer from '@src/components/Footer';
+import InfoIcon from '@mui/icons-material/Info';
+import SearchIcon from '@mui/icons-material/Search';
+import { Tooltip } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import { Tooltip } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import debounce from 'lodash/debounce';
+import { useState, useRef, useEffect } from 'react';
+
+import Footer from '@src/components/Footer';
 import { useLoading } from '@src/contexts/LoadingContext';
 
 type Book = {
@@ -25,7 +26,7 @@ type Book = {
   };
 };
 
-export default function Debounce () {
+export default function Debounce() {
   const [books, setBooks] = useState<Book[]>([]);
   const [searchCriteria, setSeachCriteria] = useState<string>('');
   const { setLoading } = useLoading();
@@ -38,7 +39,7 @@ export default function Debounce () {
     const controller = new AbortController();
 
     fetch(`https://gutendex.com/books/?search=${searchCriteria}`, {
-      signal: controller.signal
+      signal: controller.signal,
     })
       .then((response) => {
         if (response.ok) {
@@ -63,56 +64,54 @@ export default function Debounce () {
     }, 300)
   ).current;
 
-  function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     debouncedSearch(e.target.value);
   }
 
   return (
-    <>
-      <section>
-        <h1 className="mb-4 text-3xl font-bold">Books finder</h1>
-        <Paper
-          component="form"
-          sx={{ p: '2px 8px', display: 'flex', alignItems: 'center' }}
-        >
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search Books"
-            onChange={handleChange}
-            inputProps={{ 'aria-label': 'search google maps' }}
-          />
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        <ImageList variant="masonry" cols={5} gap={18}>
-          {books.map((book) => (
-            <ImageListItem key={book.id}>
-              <img
-                src={book.formats['image/jpeg']}
-                srcSet={book.formats['image/jpeg']}
-                alt={book.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={book.title}
-                subtitle={book.authors.at(0)?.name || 'No author'}
-                actionIcon={
-                  <Tooltip title={book.title}>
-                    <IconButton
-                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                      aria-label={`info about ${book.title}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  </Tooltip>
-                }
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-        <Footer />
-      </section>
-    </>
+    <section>
+      <h1 className="mb-4 text-3xl font-bold">Books finder</h1>
+      <Paper
+        component="form"
+        sx={{ p: '2px 8px', display: 'flex', alignItems: 'center' }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Search Books"
+          onChange={handleChange}
+          inputProps={{ 'aria-label': 'search google maps' }}
+        />
+        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+      <ImageList variant="masonry" cols={5} gap={18}>
+        {books.map((book) => (
+          <ImageListItem key={book.id}>
+            <img
+              src={book.formats['image/jpeg']}
+              srcSet={book.formats['image/jpeg']}
+              alt={book.title}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              title={book.title}
+              subtitle={book.authors.at(0)?.name || 'No author'}
+              actionIcon={
+                <Tooltip title={book.title}>
+                  <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${book.title}`}
+                  >
+                    <InfoIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+      <Footer />
+    </section>
   );
 }

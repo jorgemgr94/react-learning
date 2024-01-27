@@ -1,7 +1,8 @@
 import { useState, useCallback, useMemo } from 'react';
+
 import Todos from '@src/components/Todos';
 
-function expensiveCalculation (num: number) {
+function expensiveCalculation(num: number) {
   console.log('Calculating...');
   for (let i = 0; i < 1000000000; i++) {
     num += 1;
@@ -9,7 +10,7 @@ function expensiveCalculation (num: number) {
   return num;
 }
 
-export default function Callback () {
+export default function Callback() {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState<string[]>([]);
   const calculation = useMemo(() => expensiveCalculation(count), [count]);

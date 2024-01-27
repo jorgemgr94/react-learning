@@ -7,13 +7,13 @@ interface ContextProps {
 
 const LoadingContext = createContext<ContextProps>({
   loading: false,
-  setLoading: () => null
+  setLoading: () => null,
 });
 
 interface LoadingProviderProps {
   children: React.ReactNode;
 }
-export function LoadingProvider ({ children }: LoadingProviderProps) {
+export function LoadingProvider({ children }: LoadingProviderProps) {
   const [loading, setLoading] = useState(false);
   const value = { loading, setLoading };
   return (
@@ -21,7 +21,7 @@ export function LoadingProvider ({ children }: LoadingProviderProps) {
   );
 }
 
-export function useLoading () {
+export function useLoading() {
   const context = useContext(LoadingContext);
   if (!context) {
     throw new Error('useLoading must be used within LoadingProvider');

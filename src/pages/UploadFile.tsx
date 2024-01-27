@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function UploadFile () {
+function UploadFile() {
   const [file, setFile] = useState<File | undefined>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,7 +14,7 @@ function UploadFile () {
       // TODO: implement backend stuff
       const res = await fetch('/api/upload', {
         method: 'POST',
-        body: data
+        body: data,
       });
       console.log(res);
 

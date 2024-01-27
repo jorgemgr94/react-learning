@@ -3,14 +3,14 @@ import { useState } from 'react';
 interface LoginProps {
   onSubmit: ({
     username,
-    password
+    password,
   }: {
     username: string;
     password: string;
   }) => void;
 }
 
-export default function Login ({ onSubmit }: LoginProps) {
+export default function Login({ onSubmit }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

@@ -1,7 +1,8 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import RemotePizza from '../RemotePizza';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+
+import RemotePizza from '../RemotePizza';
 
 const ingredients = ['bacon', 'tomato', 'mozzarella', 'pineapples'];
 let mock = new MockAdapter(axios);

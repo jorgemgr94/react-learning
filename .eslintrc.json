@@ -3,7 +3,6 @@
   "root": true,
   "env": { "browser": true, "es2020": true, "node": true, "jest": true },
   "extends": [
-    "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
@@ -37,7 +36,6 @@
   "rules": {
     "no-var": "warn",
     "object-shorthand": ["warn", "properties"],
-
     "accessor-pairs": [
       "error",
       { "setWithoutGet": true, "enforceForClassMembers": true }
@@ -53,24 +51,7 @@
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "block-spacing": ["error", "always"],
     "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
-    "camelcase": [
-      "error",
-      {
-        "allow": ["^UNSAFE_"],
-        "properties": "never",
-        "ignoreGlobals": true
-      }
-    ],
-    "comma-dangle": [
-      "error",
-      {
-        "arrays": "never",
-        "objects": "never",
-        "imports": "never",
-        "exports": "never",
-        "functions": "never"
-      }
-    ],
+
     "comma-spacing": ["error", { "before": false, "after": true }],
     "comma-style": ["error", "last"],
     "computed-property-spacing": [
@@ -83,11 +64,9 @@
     "default-case-last": "error",
     "dot-location": ["error", "property"],
     "dot-notation": ["error", { "allowKeywords": true }],
-    "eol-last": "error",
     "eqeqeq": ["error", "always", { "null": "ignore" }],
     "func-call-spacing": ["error", "never"],
     "generator-star-spacing": ["error", { "before": true, "after": true }],
-    "indent": ["error", 2, { "SwitchCase": 1, "VariableDeclarator": 1 }],
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
     "keyword-spacing": ["error", { "before": true, "after": true }],
     "lines-between-class-members": [
@@ -168,13 +147,13 @@
     "no-octal": "error",
     "no-octal-escape": "error",
     "no-proto": "error",
-    "no-redeclare": ["error", { "builtinGlobals": false }],
     "no-regex-spaces": "error",
     "no-return-assign": ["error", "except-parens"],
     "no-self-assign": ["error", { "props": true }],
     "no-self-compare": "error",
     "no-sequences": "error",
     "no-shadow-restricted-names": "error",
+    "@typescript-eslint/no-shadow": "off",
     "no-sparse-arrays": "error",
     "no-tabs": "error",
     "no-template-curly-in-string": "error",
@@ -196,7 +175,6 @@
         "allowTaggedTemplates": true
       }
     ],
-    "@typescript-eslint/no-unused-vars": "error",
     "no-use-before-define": [
       "error",
       { "functions": false, "classes": false, "variables": false }
@@ -217,7 +195,7 @@
     "object-curly-spacing": ["error", "always"],
     "object-property-newline": [
       "error",
-      { "allowMultiplePropertiesPerLine": true }
+      { "allowAllPropertiesOnSameLine": true }
     ],
     "one-var": ["error", { "initialized": "never" }],
     "operator-linebreak": [
@@ -233,16 +211,10 @@
     "prefer-promise-reject-errors": "error",
     "prefer-regex-literals": ["error", { "disallowRedundantWrapping": true }],
     "quote-props": ["error", "as-needed"],
-    "quotes": [
-      "error",
-      "single",
-      { "avoidEscape": true, "allowTemplateLiterals": false }
-    ],
     "rest-spread-spacing": ["error", "never"],
     "semi": ["error"],
     "semi-spacing": ["error", { "before": false, "after": true }],
     "space-before-blocks": ["error", "always"],
-    "space-before-function-paren": ["error", "always"],
     "space-in-parens": ["error", "never"],
     "space-infix-ops": "error",
     "space-unary-ops": ["error", { "words": true, "nonwords": false }],
@@ -274,14 +246,113 @@
     "yield-star-spacing": ["error", "both"],
     "yoda": ["error", "never"],
 
-    "import/export": "error",
-    "import/first": "error",
-    "import/no-absolute-path": [
+    "indent": [
       "error",
-      { "esmodule": true, "commonjs": true, "amd": false }
+      2,
+      { "SwitchCase": 1, "VariableDeclarator": 1, "ArrayExpression": 1 }
     ],
-    "import/no-duplicates": "error",
-    "import/no-named-default": "error",
-    "import/no-webpack-loader-syntax": "error"
+    "quotes": [
+      "error",
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": false }
+    ],
+    "react/display-name": "off",
+    "no-alert": 0,
+    "camelcase": [
+      "error",
+      {
+        "allow": ["^UNSAFE_"],
+        "properties": "never",
+        "ignoreGlobals": true
+      }
+    ],
+    "eol-last": "error",
+    "no-console": 0,
+    "no-unused-vars": "off",
+    "no-param-reassign": 0,
+    "no-underscore-dangle": 0,
+    "no-restricted-exports": 0,
+    "react/no-children-prop": 0,
+    "react/react-in-jsx-scope": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/no-array-index-key": 0,
+    "no-promise-executor-return": 0,
+    "react/require-default-props": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/prefer-default-export": 0,
+    "react/function-component-definition": 0,
+    "@typescript-eslint/naming-convention": 0,
+    "jsx-a11y/control-has-associated-label": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "react/jsx-no-useless-fragment": [
+      1,
+      {
+        "allowExpressions": true
+      }
+    ],
+    "prefer-destructuring": [
+      1,
+      {
+        "object": true,
+        "array": false
+      }
+    ],
+    "react/no-unstable-nested-components": [
+      1,
+      {
+        "allowAsProps": true
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/jsx-no-duplicate-props": [
+      1,
+      {
+        "ignoreCase": false
+      }
+    ],
+    "unused-imports/no-unused-imports": 0,
+    "unused-imports/no-unused-vars": [
+      0,
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    /* Confirmed */
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "never",
+        "functions": "never",
+        "enums": "always-multiline",
+        "generics": "always-multiline"
+      }
+    ],
+
+    /* import */
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"],
+          "unknown"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   }
 }

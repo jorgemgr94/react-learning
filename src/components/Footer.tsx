@@ -1,10 +1,10 @@
-import { memo } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import { memo } from 'react';
 
-function Copyright () {
+function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
@@ -22,7 +22,7 @@ interface FooterProps {
   title?: string;
 }
 
-function Footer (props: FooterProps) {
+function Footer(props: FooterProps) {
   const { description, title } = props;
 
   return (
